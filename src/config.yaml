@@ -1,0 +1,12 @@
+dbfile: "dbfile"
+service:
+  apiserver: ":8000"
+  scgrpc: "127.0.0.1:50000"
+  ifname: "eth1"
+  grpctimeout: 5000
+  proxygrpcportstart: 60000
+log:
+  tcpmax: "tcpmax.log"
+  gin: "gin.log"
+  proxy: "proxy.log"
+  srvctl: "srvctl.log"

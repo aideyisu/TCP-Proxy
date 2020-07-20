@@ -1,0 +1,30 @@
+syntax = "proto3";  //protobuf3协议
+package pb;
+
+// ProxyReplyOnly 应答消息
+message ProxyReplyOnly {
+    string Code = 1;
+    string Message = 2;
+}
+
+message ProxyStopRequest {
+}
+
+message ProxyHealthzRequest {
+}
+
+// ProxyDisconnectRequest 断开连接请求
+message ProxyDisconnectRequest {
+    string Protocol = 1;
+    string InConnIP = 2;
+    string OutConnIP = 3;
+    uint32 InConnPort = 4;
+    uint32 OutConnPort = 5;
+}
+
+// 子进程grpc服务
+service Proxy {
+    rpc Stop(ProxyStopRequest) returns(ProxyReplyOnly);
+    rpc Disconnect(ProxyDisconnectRequest) returns(ProxyReplyOnly);
+    rpc Healthz(ProxyHealthzRequest) returns(ProxyReplyOnly);
+}

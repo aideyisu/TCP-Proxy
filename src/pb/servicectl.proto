@@ -1,0 +1,65 @@
+syntax = "proto3";  //protobuf3协议
+package pb;
+
+// 服务监听进程应答消息
+message  ServiceCntrolReplyOnly {
+    int32 StatusCode = 1;
+    string Reason = 2;
+}
+
+message ProxyMapAddRequest {
+    string Creator = 1;
+    uint32 ListenPort = 2;
+    string IP = 3;
+    uint32 Port = 4;
+}
+
+message ProxyMapDelRequest {
+    uint32 ListenPort = 1;
+    string IP = 2;
+    uint32 Port = 3;
+}
+
+message ProxyMapModifyRequest {
+    int64 ID = 1;
+    uint32 ListenPort = 2;
+    string IP = 3;
+    uint32 Port = 4;
+}
+
+// 添加监听IP请求
+message ListenAddrAddRequest {
+    string IP = 1;
+    string Createor = 2;
+}
+
+// 删除监听IP请求
+message ListenAddrDelRequest {
+    string IP = 1;
+}
+
+// 修改监听IP请求
+message ListenAddrModifyRequest {
+    int64 ID = 1;
+    string IP = 2;
+}
+
+//message ServiceCntrolDisconnectRequest {
+//    string Protocol = 1;
+//    string SrcIP = 2;
+//    string DstIP = 3;
+//    uint32 SrcPort = 4;
+//    uint32 DstPort = 5;
+//}
+
+service ServiceControl {
+    rpc ListenAddrAdd(ListenAddrAddRequest) returns (ServiceCntrolReplyOnly);
+    rpc ListenAddrDel(ListenAddrDelRequest) returns (ServiceCntrolReplyOnly);
+    rpc ListenAddrModify(ListenAddrModifyRequest) returns(ServiceCntrolReplyOnly);
+
+    rpc ProxyMapAdd(ProxyMapAddRequest) returns (ServiceCntrolReplyOnly);
+    rpc ProxyMapDel(ProxyMapDelRequest) returns (ServiceCntrolReplyOnly);
+    rpc ProxyMapModify(ProxyMapModifyRequest) returns (ServiceCntrolReplyOnly);
+
+    //rpc Disconnect(ServiceCntrolDisconnectRequest) returns(ServiceCntrolReplyOnly);
+}
