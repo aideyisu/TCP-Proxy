@@ -30,6 +30,8 @@
   
   5 config.yaml 配置管理
 
+  6 运行在docker中很便捷!
+
 ## webapi
 
 ### 运行
